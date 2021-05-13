@@ -187,6 +187,7 @@ func Load(ktPath string) (*Keytab, error) {
 	if err != nil {
 		return kt, err
 	}
+	log.Infof("content bytes :%+v", b)
 	err = kt.Unmarshal(b)
 	return kt, err
 }
