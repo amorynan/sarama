@@ -1,6 +1,7 @@
 package sarama
 
 import (
+	"fmt"
 	krb5client "github.com/jcmturner/gokrb5/v8/client"
 	krb5config "github.com/jcmturner/gokrb5/v8/config"
 	"github.com/jcmturner/gokrb5/v8/keytab"
@@ -35,7 +36,7 @@ func createClient(config *GSSAPIConfig, cfg *krb5config.Config) (KerberosClient,
 	if config.AuthType == KRB5_KEYTAB_AUTH {
 		kt, err := keytab.Load(config.KeyTabPath)
 		if err != nil {
-			return nil, err
+			return nil, fmt.Errorf("=========load in keytab err :%+v", err)
 		}
 		client = krb5client.NewWithKeytab(config.Username, config.Realm, kt, cfg, krb5client.DisablePAFXFAST(config.DisablePAFXFAST))
 	} else {
