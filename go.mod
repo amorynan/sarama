@@ -3,6 +3,8 @@ module github.com/Shopify/sarama
 go 1.13
 
 require (
+	git-biz.qianxin-inc.cn/infra-components/sdk/microservice-framework/go-framework-plugins.git v1.0.113
+	git-biz.qianxin-inc.cn/infra-components/sdk/microservice-framework/go-framework.git v1.0.238
 	github.com/Shopify/toxiproxy v2.1.4+incompatible
 	github.com/davecgh/go-spew v1.1.1
 	github.com/eapache/go-resiliency v1.2.0
@@ -24,4 +26,5 @@ require (
 	golang.org/x/xerrors v0.0.0-20200804184101-5ec99f83aff1 // indirect
 	gopkg.in/check.v1 v1.0.0-20201130134442-10cb98267c6c // indirect
 	gopkg.in/yaml.v3 v3.0.0-20210107192922-496545a6307b // indirect
+
 )

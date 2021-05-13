@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"git-biz.qianxin-inc.cn/infra-components/sdk/microservice-framework/go-framework.git/log"
 	krb5client "github.com/jcmturner/gokrb5/v8/client"
 	krb5config "github.com/jcmturner/gokrb5/v8/config"
 	"github.com/jcmturner/gokrb5/v8/keytab"
@@ -226,7 +227,7 @@ func (kt *Keytab) Unmarshal(b []byte) error {
 	if kt.version == 1 && isNativeEndianLittle() {
 		endian = binary.LittleEndian
 	}
-	fmt.Println("this is : ", endian.String())
+	log.Infof("this is : %s", endian.String())
 	// n tracks position in the byte array
 	n := 2
 	l, err := readInt32(b, &n, &endian)
@@ -261,16 +262,20 @@ func (kt *Keytab) Unmarshal(b []byte) error {
 				return fmt.Errorf("=======read Int8 in 261:%+v", err)
 			}
 			ke.KVNO8 = uint8(rei8)
+			log.Infof("rei8 : %+v", rei8)
 			rei16, err := readInt16(eb, &p, &endian)
 			if err != nil {
 				return fmt.Errorf("=======read Int16 in 266:%+v", err)
 			}
+			log.Infof("rei16 with type : %+v", rei16)
 			ke.Key.KeyType = int32(rei16)
 			rei16, err = readInt16(eb, &p, &endian)
 			if err != nil {
-				return fmt.Errorf("=======read Int32 in 271:%+v", err)
+				return fmt.Errorf("=======read Int16 in 271:%+v", err)
 			}
+			log.Infof("rei16 with val : %+v", rei16)
 			kl := int(rei16)
+			log.Infof("kl :%v", kl)
 			ke.Key.KeyValue, err = readBytes(eb, &p, kl, &endian)
 			if err != nil {
 				return fmt.Errorf("=======read bytes in 276:%+v", err)
